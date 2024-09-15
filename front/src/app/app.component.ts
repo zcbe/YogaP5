@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './features/auth/services/auth.service';
@@ -14,8 +14,10 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private sessionService: SessionService) {
-  }
+    private sessionService: SessionService,
+    private zone: NgZone, 
+    ) {
+      }
 
   public $isLogged(): Observable<boolean> {
     return this.sessionService.$isLogged();
@@ -23,6 +25,8 @@ export class AppComponent {
 
   public logout(): void {
     this.sessionService.logOut();
-    this.router.navigate([''])
-  }
+    // Use ngZone.run() to execute la navigation inside Angular zone
+    this.zone.run(() => {
+      this.router.navigate(['']);
+    });  }
 }
