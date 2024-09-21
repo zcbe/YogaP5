@@ -49,9 +49,13 @@ By default the admin account is:
 
 #### E2E
 
-Launching e2e test:
+Start e2e test:
 
 > npm run e2e
+
+Launching e2e test:
+
+> npx cypress run
 
 Generate coverage report (you should launch e2e test before):
 

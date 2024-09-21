@@ -20,10 +20,10 @@ export function getMonthName (monthNumber: number) : String {
           cy.intercept('POST', '/api/auth/login', {
               body: {
                   id: 1,
-                  username: "yoga@studio.com",  // Nom d'utilisateur
-                  firstName: 'Admin',           // Prénom
-                  lastName: 'Admin',            // Nom
-                  admin: true                   // Indique que c'est un admin
+                  username: "yoga@studio.com",  
+                  firstName: 'Admin',           
+                  lastName: 'Admin',            
+                  admin: true                   
               }
           })
   
@@ -41,8 +41,8 @@ export function getMonthName (monthNumber: number) : String {
               lastName: "Admin",
               firstName: "Admin",
               admin: true,
-              createdAt: "2024-09-15 18:57:17",  // Date de création du compte
-              updatedAt: "2024-09-15 18:57:17",  // Date de mise à jour du compte
+              createdAt: "2024-09-15 18:57:17",  
+              updatedAt: "2024-09-15 18:57:17",  
           }
   
           // Interception de la requête GET pour récupérer les informations de l'utilisateur
@@ -52,12 +52,12 @@ export function getMonthName (monthNumber: number) : String {
           cy.get('[routerlink="me"]').click();
   
           // Extraction des dates de création et mise à jour du compte et formatage
-          const createdAtYear = userInfo.createdAt.slice(0,10).split("-")[0]; // Année de création
-          const updatedAtYear = userInfo.updatedAt.slice(0,10).split("-")[0]; // Année de mise à jour
-          const createdAtMonth = getMonthName(parseInt(userInfo.createdAt.slice(0,10).split("-")[1])); // Mois de création
-          const updatedAtMonth = getMonthName(parseInt(userInfo.updatedAt.slice(0,10).split("-")[1])); // Mois de mise à jour
-          const createdAtDay = parseInt(userInfo.createdAt.slice(0,10).split("-")[2]); // Jour de création
-          const updatedAtDay = parseInt(userInfo.updatedAt.slice(0,10).split("-")[2]); // Jour de mise à jour
+          const createdAtYear = userInfo.createdAt.slice(0,10).split("-")[0]; 
+          const updatedAtYear = userInfo.updatedAt.slice(0,10).split("-")[0]; 
+          const createdAtMonth = getMonthName(parseInt(userInfo.createdAt.slice(0,10).split("-")[1])); 
+          const updatedAtMonth = getMonthName(parseInt(userInfo.updatedAt.slice(0,10).split("-")[1])); 
+          const createdAtDay = parseInt(userInfo.createdAt.slice(0,10).split("-")[2]); 
+          const updatedAtDay = parseInt(userInfo.updatedAt.slice(0,10).split("-")[2]); 
   
           // Vérifie que les informations de l'utilisateur sont visibles
           cy.contains(`${userInfo.firstName} ${userInfo.lastName.toUpperCase()}`).should('be.visible');

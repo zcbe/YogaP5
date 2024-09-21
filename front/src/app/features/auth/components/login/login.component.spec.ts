@@ -118,13 +118,14 @@ describe('LoginComponent', () => {
 
   it('should show an error message', () => {
     component.onError = true; // Simule une erreur dans le composant
-    fixture.detectChanges();
-
-    const form = fixture.nativeElement;
-    const errorMessage = form.querySelector('p.error');
-    expect(errorMessage).toBeTruthy(); // Vérifie que le message d'erreur est affiché
-    expect(errorMessage!.textContent).toContain('An error occurred'); // Vérifie que le message d'erreur contient le texte attendu
+    fixture.detectChanges(); // Force la mise à jour du DOM
+  
+    const form = fixture.nativeElement; // Récupère l'élément HTML du formulaire
+    const errorMessage = form.querySelector('p.error'); // Cherche l'élément HTML contenant le message d'erreur
+    expect(errorMessage).toBeTruthy(); // Vérifie que le message d'erreur est présent dans le DOM
+    expect(errorMessage!.textContent).toContain('An error occurred'); // Vérifie que le texte du message d'erreur contient bien "An error occurred"
   });
+  
 
   it('should indicate error', () => {
     const authService = TestBed.inject(AuthService); // Injection du AuthService
