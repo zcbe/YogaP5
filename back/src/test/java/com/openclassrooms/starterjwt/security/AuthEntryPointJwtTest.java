@@ -65,4 +65,12 @@ class AuthEntryPointJwtTest {
         // Vérifie que le chemin de la requête est celui utilisé dans la requête
         assertThat(responseBody.get("path")).isEqualTo(request.getServletPath());
     }
+
+    public AuthEntryPointJwt getAuthEntryPointJwt() {
+        return authEntryPointJwt;
+    }
+
+    public void setAuthEntryPointJwt(AuthEntryPointJwt authEntryPointJwt) {
+        this.authEntryPointJwt = authEntryPointJwt;
+    }
 }

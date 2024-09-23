@@ -81,8 +81,18 @@ class AuthControllerTest {
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(authentication);
         when(jwtUtils.generateJwtToken(authentication)).thenReturn("mockJwtToken");
 
-        // Création d'un utilisateur factice dans le dépôt
-        User mockUser = new User(1L, "user1@mail.com", "User", "USER", "password", false, LocalDateTime.now(), LocalDateTime.now());
+        // Création d'un utilisateur factice en utilisant le constructeur avec des arguments
+        User mockUser = new User(
+                "user1@mail.com",  // email
+                "USER",            // lastName
+                "User",            // firstName
+                "password",        // password
+                false              // admin
+        );
+        mockUser.setId(1L);  // Utilisation de `setId` pour l'ID
+        mockUser.setCreatedAt(LocalDateTime.now());
+        mockUser.setUpdatedAt(LocalDateTime.now());
+
         when(userRepository.findByEmail(any())).thenReturn(java.util.Optional.of(mockUser));
 
         // WHEN
