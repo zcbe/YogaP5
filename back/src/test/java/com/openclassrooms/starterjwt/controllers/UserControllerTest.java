@@ -1,17 +1,19 @@
 package com.openclassrooms.starterjwt.controllers;
 
 // Importation des assertions pour vérifier les résultats des tests
-import static org.assertj.core.api.Assertions.assertThat;
-// Importation des méthodes pour simuler des comportements avec Mockito
-import static org.mockito.Mockito.*;
-
-// Importation des classes nécessaires pour les tests et la manipulation du temps
 import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.anyLong;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +21,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-// Importation des classes du projet
 import com.openclassrooms.starterjwt.dto.UserDto;
 import com.openclassrooms.starterjwt.mapper.UserMapper;
 import com.openclassrooms.starterjwt.models.User;
@@ -120,7 +121,7 @@ class UserControllerTest {
 
         // THEN
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        verify(userService, times(1)).delete(Long.parseLong(userId));
+        verify(userService, times(1)).delete(Long.valueOf(userId));
     }
 
     // Test de la méthode delete() lorsqu'un utilisateur à supprimer n'est pas trouvé

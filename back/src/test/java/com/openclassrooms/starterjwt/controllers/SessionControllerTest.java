@@ -5,17 +5,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
-// Importation des classes spécifiques au projet
 import com.openclassrooms.starterjwt.dto.SessionDto;
 import com.openclassrooms.starterjwt.mapper.SessionMapper;
 import com.openclassrooms.starterjwt.models.Session;
@@ -192,7 +196,7 @@ class SessionControllerTest {
         // THEN
         // Vérification que le code de statut HTTP est OK et que la méthode delete du service a été appelée une fois
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        verify(sessionService, times(1)).delete(Long.parseLong(sessionId));
+        verify(sessionService, times(1)).delete(Long.valueOf(sessionId));
     }
 
     // Test de la méthode delete() lorsqu'aucune session n'est trouvée pour suppression
@@ -236,7 +240,7 @@ class SessionControllerTest {
         // THEN
         // Vérification que le code de statut HTTP est OK et que la méthode participate du service a été appelée une fois
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        verify(sessionService, times(1)).participate(Long.parseLong(sessionId), Long.parseLong(userId));
+        verify(sessionService, times(1)).participate(Long.valueOf(sessionId), Long.valueOf(userId));
     }
 
     // Test de la méthode participate() lorsqu'un identifiant de session invalide est fourni
@@ -267,7 +271,7 @@ class SessionControllerTest {
         // THEN
         // Vérification que le code de statut HTTP est OK et que la méthode noLongerParticipate du service a été appelée une fois
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        verify(sessionService, times(1)).noLongerParticipate(Long.parseLong(sessionId), Long.parseLong(userId));
+        verify(sessionService, times(1)).noLongerParticipate(Long.valueOf(sessionId), Long.valueOf(userId));
     }
 
     // Test de la méthode noLongerParticipate() lorsqu'un identifiant de session invalide est fourni
